@@ -1,0 +1,10 @@
+#!yasl_linux
+!!
+" "+
+3^
+" "+
++
+2^
++
+eval
+print
