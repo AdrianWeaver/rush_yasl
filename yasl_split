@@ -1,0 +1,16 @@
+#!yasl_linux
+!!
+(# 2 !=) ? ("Please provide two parameters suiting the template <char> <string>\n"print 0 exit)
+([#] 1 !=) ? ("Please provide two parameters suiting the template <char> <string>\n"print 0 exit)
+=:1
+!
+][
+!
+0
+#
+^
+"":2
+%@(=:1
+1:%==:0 ? (2:print "":2): (1:print:1 "\n":2)
+#
+^)
