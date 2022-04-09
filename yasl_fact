@@ -1,0 +1,19 @@
+#!yasl_linux
+!!
+
+{
+    (= 0 ==) ? 1:1 : (
+        0:=:1
+        1
+        -
+        fact
+        1:*:1
+    )
+} fact
+
+([#] 3 >) ? ("hey that's way too much\n"print 0 exit)
+(= 0 < ) ? ("start_num must be a positive number\n"print 0 exit)
+(= 20 > ) ? ("hey that's to much\n"print 0 exit)
+
+(# 1 !=) ? (0 exit) : (fact)
+1:print
