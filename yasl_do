@@ -6,5 +6,7 @@
 +
 2^
 +
+" print"+
 eval
+"\n"
 print
