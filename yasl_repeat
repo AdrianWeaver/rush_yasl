@@ -15,7 +15,18 @@
 	)
 }repeat
 !!
-(# 0 ==) ? ("please provide two parameters"print 0 exit)
+(# 2 <) ? ("please provide at least two parameters"print 0 exit)
 0:=:1
+0:=:4
+4:][:4
+4:=:5
+4:!
+5:%@(
+	(4:=:4 0:4 4:>:4) 4:? () : ("The first argument start_num must be a positive number\n":4 4:print 0 exit)
+	(4:=:4 9:4 4:<:4) 4:? () : ("The first argument start_num must be a positive number\n":4 4:print 0 exit)
+	4:!
+	1:5
+	5:-:5
+	)
 (0 <=) ? ("the first argument start_num must be a positive number\n"print 0 exit)
 (# 0 ==) ? (0 exit) : (# #repeat)
