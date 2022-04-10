@@ -1,0 +1,4 @@
+#!yasl_linux
+# #!
+read
+@(eval read)!
