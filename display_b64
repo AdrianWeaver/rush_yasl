@@ -9,10 +9,10 @@
 } print_wrong_image
 
 //This function returns the square root of the top value from stack_1
-//input_stack = 1(not inherited)			output_stack = 2 (not inherited)
+//input_stack = 1						output_stack = 2
 {
 	1:4				// using stack 4 to loop
-	1:3				
+	1:3
 	4:%@ (			// loop using stack 4
 		3:=:3
 		3:%*:3
@@ -27,12 +27,12 @@
 } get_square_size
 
 //This function counts the amount of pixels in the image
-//input_stack = 9 (not inherited)  output_stack = 1 (not inherited)
+//input_stack = 9 					  output_stack = 1
 {
-	4:9	 
-	9:/:9	
-	9:=:1 			//store the amount of pixels on stack_1
-	9:!	  			//clean stack_9 used as input and buffer
+	4:9
+	9:/:9
+	9:=:1				//store the amount of pixels on stack_1
+	9:!					//clean stack_9 used as input and buffer
 	get_square_size //returns square size on stack_2
 } count_pixels
 
@@ -58,12 +58,12 @@
 	0:][:1 				//Split the image and stores the exploded result in stack_1
 
 	4:1
-	1:/:1				//calculate the amount of pixels (char / 4) and stores is in stack_1
+	1:/:1				//calculate the amount of pixels char / 4 and stores is in stack_1
 	1:#(
 		4:7					//The sole purpose of this bit of code
 		7:#(1:=:2 1:!)		//is to allow the stack to be ordered
 		4 :7				//the same way it was ordered before
-		7:#(2:=:3 2:!)		//iterating on it (double reverse)
+		7:#(2:=:3 2:!)		//iterating on it does a double reverse
 		3 :7
 		7:#(3:+:3) 
 		3:=:0 
@@ -74,7 +74,7 @@
 
 //This function parses the map then returns the char in base 64 converted in decimals
 //it also checks if a char in the map is out of the boundaries of the base_64
-//input_stack = 6 (not modified) output_stack = 7
+//input_stack = 6 not modified output_stack = 7
 {
 	(7:#:7 0:7 7:!=:7) 7:? (7:#:7 7:#!)
 	6:%][:7
@@ -89,12 +89,12 @@
 		7:!=:7
 		)
 	3:!
-}convert_decimal
+}	convert_decimal
 
 //This function translates the big_int in three ints, R, G and B
 //input_stack = 3				output_stack = 8
 {
-	3:2				//stack_2 used as a loop counter (temp then cleaned)
+	3:2				//stack_2 used as a loop counter temp then cleaned
 	2:%@(	
 		3:=:3
 		255:3
@@ -104,7 +104,7 @@
 		1:2			//This is the core loop function
 		2:-:2
 		)
-		2:! 		//cleans the loop variable
+		2:!		//cleans the loop variable
 } big_int_to_rgb
 
 //This function returns the big int from the 4 ints given by the map
@@ -119,7 +119,7 @@
 } big_int
 
 //This function returns the final used colour from the shortened colour
-//input_stack = 8 (cleaned)			output_stack = 4
+//input_stack = 8 cleaned			output_stack = 4
 {
 	16:8
 	8:+:8
@@ -140,7 +140,7 @@
 //input_stack = 3					output_stack = 3
 {
 	3:2
-	2:%@(						//uses stack_2 for a loop (temp)
+	2:%@(						//uses stack_2 for a loop temp
 		3:=:3
 		255:3
 		3:&:3
@@ -155,24 +155,27 @@
 		2:! 					//clean loop temp usage
 } big_int_to_colour
 
+//This function takes the final shortened colour and print two spaces with the
+//proper colour code
+//input_stack=6,0	output_stack = none prints on screen
 {
-	(7:#:7 7:#:7 7:#!)		// Vider la stack 7
-	6:%][:7					// On split la base dans la stack 7
-	7:!						// On supprime le nombre de caractere
+	(7:#:7 7:#:7 7:#!)		// wipe completely stack_7
+	6:%][:7					// exploading base in stack_7 keeping stack_6 intact
+	7:!						// removing number of chars from stack_7
 
-	0:=:3					// Duplique la string qu'il va modifie dans la stack 3
-	0:!						// Supprime la chaine dans la stack 0
-	3:][:3					// Explose la string en caractere dans la stack 3
-	3:!						// Supprime la taille dans la stack 3
+	0:=:3					// Duplicate string in stack_3 modified there
+	0:!						// clearing stack_0
+	3:][:3					// exploading string in chars on stack_3
+	3:!						// removing size of string from stack_3
 	
-	4:8						// On met 4 dans la stack 8
-	8:#convert_decimal		// Dans 8 
-	big_int					//return in stack_4, le big int est bon.
+	4:8
+	8:#convert_decimal		//launching 4 times convert_decimal function
+	big_int					//returns in stack_4 the big_ints from strings
 
 	4:#:4
 	4:#(4:=:3 4:!)
-	big_int_to_colour		//returns the final colour unshortened
-	shorten_to_colour		//return in stack_8
+	big_int_to_colour		//returns the final colour unshortened 32bits
+	shorten_to_colour		//return in stack_8 the final colour 8bits
 	"\e[48;5;":8
 	4:=:8
 	"m  ":8
@@ -209,7 +212,7 @@ read
 
 count_pixels
 display_info
-split_to_pixel_to_4char_string					
+split_to_pixel_to_4char_string
 						// Stack_0 : all the size 4 pixel strings
 						// Stack_2 : square size (square root)
 						// Stack_6 : storing base values
